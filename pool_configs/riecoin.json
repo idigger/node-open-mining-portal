@@ -2,11 +2,7 @@
     "enabled": true,
     "coin": "riecoin.json",
 
-    "address": "RSoTqUcauJewHZYmPnM8w3p1LVcV5C2Fh1",
-
-    "rewardRecipients": {
-        "RF85xKkjgdSRm3NUfSTikpeJdis56kaRUn": 0
-    },
+    "address": "RF85xKkjgdSRm3NUfSTikpeJdis56kaRUn",
 
     "paymentProcessing": {
         "enabled": false,
