@@ -1,0 +1,8 @@
+{
+    "name": "Dash",
+    "symbol": "DASH",
+    "algorithm": "x11",
+    "mposDiffMultiplier": 256,
+    "peerMagic": "bf0c6bbd",
+    "peerMagicTestnet": "cee2caff"
+}

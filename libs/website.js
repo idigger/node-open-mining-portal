@@ -93,6 +93,7 @@ module.exports = function(logger){
         });
     };
 
+
     // if an html file was changed reload it
     /* requires node-watch 0.5.0 or newer */
     watch(['./website', './website/pages'], function(evt, filename){
@@ -102,7 +103,7 @@ module.exports = function(logger){
             basename = path.basename(evt);
         else
             basename = path.basename(filename);
-        
+
         if (basename in pageFiles){
             readPageFiles([basename]);
             logger.special(logSystem, 'Server', 'Reloaded file ' + basename);

@@ -123,7 +123,12 @@ module.exports = function(logger){
             handlers.diff = function(workerName, diff){
                 mposCompat.handleDifficultyUpdate(workerName, diff);
             }
-        }
+        } 
+
+        //Functions required for Mongo Mode
+        //else if (poolOptions.mongoMode && poolOptions.mongoMode.enabled) {
+            //TODO: PRIORITY: Write this section
+        //}
 
         //Functions required for internal payment processing
         else{
@@ -136,7 +141,7 @@ module.exports = function(logger){
                 else {
                     if (workerName.length === 40) {
                         try {
-                            new Buffer(workerName, 'hex');
+                            Buffer.from(workerName, 'hex');
                             authCallback(true);
                         }
                         catch (e) {
@@ -188,12 +193,16 @@ module.exports = function(logger){
                 logger.debug(logSystem, logComponent, logSubCat, 'We thought a block was found but it was rejected by the daemon, share data: ' + shareData);
 
             else if (isValidBlock)
-                logger.debug(logSystem, logComponent, logSubCat, 'Block found: ' + data.blockHash);
+                logger.debug(logSystem, logComponent, logSubCat, 'Block found: ' + data.blockHash + ' by ' + data.worker);
 
-            if (isValidShare)
+            if (isValidShare) {
+                if(data.shareDiff > 1000000000)
+                    logger.debug(logSystem, logComponent, logSubCat, 'Share was found with diff higher than 1.000.000.000!');
+                else if(data.shareDiff > 1000000)
+                    logger.debug(logSystem, logComponent, logSubCat, 'Share was found with diff higher than 1.000.000!');
                 logger.debug(logSystem, logComponent, logSubCat, 'Share accepted at diff ' + data.difficulty + '/' + data.shareDiff + ' by ' + data.worker + ' [' + data.ip + ']' );
 
-            else if (!isValidShare)
+            } else if (!isValidShare)
                 logger.debug(logSystem, logComponent, logSubCat, 'Share rejected: ' + shareData);
 
             handlers.share(isValidShare, isValidBlock, data)

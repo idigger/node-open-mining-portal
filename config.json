@@ -10,12 +10,12 @@
     },
 
     "defaultPoolConfigs": {
-        "blockRefreshInterval": 0,
+        "blockRefreshInterval": 5000,
         "jobRebroadcastTimeout": 55,
-        "connectionTimeout": 600,
+        "connectionTimeout": 180,
         "emitInvalidBlockHashes": false,
         "validateWorkerUsername": true,
-        "tcpProxyProtocol": false,
+        "tcpProxyProtocol": true,
         "shareDiff": 5,
         "banning": {
             "enabled": true,
@@ -56,7 +56,7 @@
             "enabled": false,
             "algorithm": "sha256",
             "ports": {
-                "3333": {
+                "2222": {
                     "diff": 10,
                     "varDiff": {
                         "minDiff": 16,
@@ -72,7 +72,7 @@
             "enabled": false,
             "algorithm": "scrypt",
             "ports": {
-                "4444": {
+                "3333": {
                     "diff": 10,
                     "varDiff": {
                         "minDiff": 16,
@@ -88,7 +88,7 @@
             "enabled": false,
             "algorithm": "x11",
             "ports": {
-                "5555": {
+                "4443": {
                     "diff": 0.001,
                     "varDiff": {
                         "minDiff": 0.001,

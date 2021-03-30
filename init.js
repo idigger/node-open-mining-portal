@@ -4,7 +4,6 @@ var os = require('os');
 var cluster = require('cluster');
 
 var async = require('async');
-var extend = require('extend');
 
 var PoolLogger = require('./libs/logUtil.js');
 var CliListener = require('./libs/cliListener.js');
@@ -159,10 +158,11 @@ var buildPoolConfigs = function(){
             if (!(option in poolOptions)){
                 var toCloneOption = portalConfig.defaultPoolConfigs[option];
                 var clonedOption = {};
-                if (toCloneOption.constructor === Object)
-                    extend(true, clonedOption, toCloneOption);
-                else
+                if (toCloneOption.constructor === Object) {
+                    Object.assign(clonedOption, toCloneOption);
+                } else { 
                     clonedOption = toCloneOption;
+                }
                 poolOptions[option] = clonedOption;
             }
         }
@@ -255,9 +255,15 @@ var spawnPoolWorkers = function(){
 
 var startCliListener = function(){
 
+    // For backward compatibility
+    var cliHost = '127.0.0.1';
+    if (portalConfig.cliHost) {
+        cliHost = portalConfig.cliHost;
+    }
+
     var cliPort = portalConfig.cliPort;
 
-    var listener = new CliListener(cliPort);
+    var listener = new CliListener(cliHost, cliPort);
     listener.on('log', function(text){
         logger.debug('Master', 'CLI', text);
     }).on('command', function(command, params, options, reply){

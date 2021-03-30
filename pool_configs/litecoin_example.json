@@ -65,6 +65,15 @@
         "database": "ltc",
         "checkPassword": true,
         "autoCreateWorker": false
+    },
+
+    "mongoMode": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "user": "",
+        "pass": "",
+        "database": "ltc",
+        "authMechanism": "DEFAULT"
     }
 
 }

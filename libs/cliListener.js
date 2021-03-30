@@ -1,7 +1,7 @@
 var events = require('events');
 var net = require('net');
 
-var listener = module.exports = function listener(port){
+var listener = module.exports = function listener(host, port){
 
     var _this = this;
 
@@ -35,8 +35,8 @@ var listener = module.exports = function listener(port){
                 emitLog('CLI listener failed to parse message ' + data);
             }
 
-        }).listen(port, '127.0.0.1', function() {
-            emitLog('CLI listening on port ' + port)
+        }).listen(port, host, function() {
+            emitLog('CLI listening on ' + host + ':' + port)
         });
     }
 
